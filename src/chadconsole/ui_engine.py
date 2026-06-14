@@ -83,26 +83,26 @@ class PrettyConsoleApp(ctk.CTk):
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
 
-        self.title("✦ ChadConsole")
+        self.title("✦ Chad Console")
         self.geometry("780x500")
         self.minsize(520, 400)
         self.configure(fg_color=Colors.BG_MAIN)
 
         # ── Header bar ────────────────────────────────────────────────
-        header = ctk.CTkFrame(self, fg_color=Colors.BG_CARD, height=60, corner_radius=0)
+        header = ctk.CTkFrame(self, fg_color=Colors.BG_CARD_NAVBAR, height=60, corner_radius=0)
         header.pack(fill="x", side="top")
         header.pack_propagate(False)
 
         # App icon + title
         title_frame = ctk.CTkFrame(header, fg_color="transparent")
-        title_frame.pack(side="left", padx=20, pady=10)
+        title_frame.place(relx=0.5, rely=0.5, anchor="center")
 
         # Try to load premium logo image, fallback to text icon if not found
         icon_label = None
         if _LOGO_PATH.exists():
             try:
                 pil_img = Image.open(_LOGO_PATH)
-                logo_img = ctk.CTkImage(light_image=pil_img, dark_image=pil_img, size=(80, 80))
+                logo_img = ctk.CTkImage(light_image=pil_img, dark_image=pil_img, size=(40, 40))
                 icon_label = ctk.CTkLabel(
                     title_frame,
                     image=logo_img,
@@ -122,20 +122,14 @@ class PrettyConsoleApp(ctk.CTk):
 
         title_label = ctk.CTkLabel(
             title_frame,
-            text="ChadConsole",
+            text="Chad Console",
             font=FONT_TITLE,
             text_color=Colors.TEXT_PRIMARY,
         )
         title_label.pack(side="left")
 
         # Subtle version badge
-        version_badge = ctk.CTkLabel(
-            header,
-            text="v0.1.0",
-            font=FONT_LABEL,
-            text_color=Colors.TEXT_DIM,
-        )
-        version_badge.pack(side="right", padx=20)
+
 
         # ── Separator line ────────────────────────────────────────────
 

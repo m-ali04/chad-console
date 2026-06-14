@@ -21,6 +21,7 @@ class Colors:
     """Centralized color tokens for the entire UI."""
 
     BG_MAIN       = "#0D1117"   # Deep dark background
+    BG_CARD_NAVBAR = "#0c0e12"   # Card / frame background
     BG_CARD       = "#161B22"   # Card / frame background
     BG_CARD_ALT   = "#1C2333"   # Alternate card — structured data
     BG_LOOP       = "#1A1232"   # Loop container — purple-tinted dark
@@ -59,8 +60,8 @@ FONT_MONO      = ("Consolas", 13)
 FONT_MONO_LG   = ("Consolas", 14)
 FONT_BADGE     = ("Inter", 11, "bold")
 FONT_LABEL     = ("Inter", 12)
-FONT_HEADER    = ("Inter", 18, "bold")
-FONT_TITLE     = ("Inter", 24, "bold")
+FONT_HEADER    = ("Inter", 16, "bold")
+FONT_TITLE     = ("Inter", 16, "bold")
 
 
 # ---------------------------------------------------------------------------
@@ -73,7 +74,7 @@ class _BaseBlock(ctk.CTkFrame):
     Provides consistent card styling with a colored left accent border.
     """
 
-    PACK_PADY = 15  # Enforced gap between blocks
+    PACK_PADY = 8  # Enforced gap between blocks
 
     def __init__(
         self,
@@ -102,13 +103,13 @@ class _BaseBlock(ctk.CTkFrame):
 
         # Content area
         self._content = ctk.CTkFrame(self, fg_color="transparent")
-        self._content.pack(side="left", fill="both", expand=True, padx=(12, 16), pady=4)
+        self._content.pack(side="left", fill="both", expand=False, padx=(12, 16), pady=4)
 
     def pack(self, **kwargs) -> None:
         """Override pack to enforce the required 15px vertical gap."""
         kwargs.setdefault("pady", self.PACK_PADY)
         kwargs.setdefault("padx", 16)
-        kwargs.setdefault("fill", "x")
+        kwargs.setdefault("anchor", "w")
         super().pack(**kwargs)
 
 
