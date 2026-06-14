@@ -285,6 +285,25 @@ def install(output_queue: queue.Queue) -> _InputHandler:
     # 2. Build the loop grouper (structural, zero-latency, no timers)
     grouper = _LoopGrouper(output_queue)
 
+    # Flush any buffered loop output when the user's script finishes.
+    # Without this, a for-loop at the END of a script (or as the ONLY thing)
+    # would never flush — the output would be silently lost.
+    #
+    # Why not atexit?  atexit handlers only fire after ALL non-daemon threads
+    # finish, but the UI thread is non-daemon (so it blocks atexit).  And when
+    # the window closes, os._exit(0) skips atexit entirely.
+    #
+    # Solution: a tiny daemon thread that waits for the main thread to end,
+    # then flushes the grouper.  The data lands in the queue and the UI thread
+    # (still alive) picks it up and renders it.
+    def _flush_on_main_exit() -> None:
+        threading.main_thread().join()
+        grouper.flush()
+
+    threading.Thread(
+        target=_flush_on_main_exit, daemon=True, name="ChadConsole-Flush"
+    ).start()
+
     # 3. Replace builtins.print
     def custom_print(*args: Any, sep: str = " ", end: str = "\n", **kwargs: Any) -> None:
         """Loop-aware, zero-latency print() replacement."""

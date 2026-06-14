@@ -118,15 +118,26 @@ class PrettyConsoleApp(ctk.CTk):
                 font=("Inter", 22),
                 text_color=Colors.ACCENT_BLUE,
             )
-        icon_label.pack(side="left", padx=(0, 8))
+        icon_label.pack(side="left", padx=(0, 1))
+
+        text_frame = ctk.CTkFrame(title_frame, fg_color="transparent")
+        text_frame.pack(side="left")
 
         title_label = ctk.CTkLabel(
-            title_frame,
+            text_frame,
             text="Chad Console",
             font=FONT_TITLE,
             text_color=Colors.TEXT_PRIMARY,
         )
-        title_label.pack(side="left")
+        title_label.pack(anchor="w")
+
+        slogan_label = ctk.CTkLabel(
+            text_frame,
+            text="Charming Python Console",
+            font=("Inter", 11),
+            text_color=Colors.TEXT_DIM,
+        )
+        slogan_label.pack(anchor="w", pady=(0, 0))
 
         # Subtle version badge
 
