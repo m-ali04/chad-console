@@ -3,16 +3,16 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "chadconsole"
+name = "chad-console"
 version = "0.1.0"
 description = "Intercepts print() and input() calls, routing them to a beautiful dark-mode GUI console."
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 authors = [
-    { name = "Ali" },
+    { name = "m-ali04", email = "[EMAIL_ADDRESS]" },
 ]
-keywords = ["console", "gui", "developer-tools", "pretty-print", "customtkinter", "chadconsole"]
+keywords = ["console", "gui", "developer-tools", "pretty-print", "customtkinter", "chad-console"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -37,9 +37,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/m-ali04/chadconsole"
-Repository = "https://github.com/m-ali04/chadconsole"
-Issues = "https://github.com/m-ali04/chadconsole/issues"
+Homepage = "https://github.com/m-ali04/chad-console"
+Repository = "https://github.com/m-ali04/chad-console"
+Issues = "https://github.com/m-ali04/chad-console/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/chadconsole"]
