@@ -12,6 +12,12 @@ from __future__ import annotations
 import queue
 import sys
 import traceback
+from pathlib import Path
+
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
 
 import customtkinter as ctk
 
@@ -28,6 +34,12 @@ from chadconsole.ui_components import (
     StandardBlock,
     StructuredBlock,
 )
+
+# ---------------------------------------------------------------------------
+# Assets
+# ---------------------------------------------------------------------------
+_ASSETS_DIR = Path(__file__).parent / "assets"
+_LOGO_PATH = _ASSETS_DIR / "logo.png"
 
 
 # ---------------------------------------------------------------------------
@@ -85,12 +97,27 @@ class PrettyConsoleApp(ctk.CTk):
         title_frame = ctk.CTkFrame(header, fg_color="transparent")
         title_frame.pack(side="left", padx=20, pady=10)
 
-        icon_label = ctk.CTkLabel(
-            title_frame,
-            text="✦",
-            font=("Inter", 22),
-            text_color=Colors.ACCENT_BLUE,
-        )
+        # Try to load premium logo image, fallback to text icon if not found
+        icon_label = None
+        if _LOGO_PATH.exists():
+            try:
+                pil_img = Image.open(_LOGO_PATH)
+                logo_img = ctk.CTkImage(light_image=pil_img, dark_image=pil_img, size=(80, 80))
+                icon_label = ctk.CTkLabel(
+                    title_frame,
+                    image=logo_img,
+                    text="",
+                )
+            except Exception:
+                pass
+
+        if icon_label is None:
+            icon_label = ctk.CTkLabel(
+                title_frame,
+                text="✦",
+                font=("Inter", 22),
+                text_color=Colors.ACCENT_BLUE,
+            )
         icon_label.pack(side="left", padx=(0, 8))
 
         title_label = ctk.CTkLabel(
@@ -111,8 +138,7 @@ class PrettyConsoleApp(ctk.CTk):
         version_badge.pack(side="right", padx=20)
 
         # ── Separator line ────────────────────────────────────────────
-        separator = ctk.CTkFrame(self, fg_color=Colors.BORDER_SUBTLE, height=1, corner_radius=0)
-        separator.pack(fill="x")
+
 
         # ── Scrollable content area ───────────────────────────────────
         self._scroll_frame = ctk.CTkScrollableFrame(

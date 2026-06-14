@@ -10,4 +10,4 @@ print("Starting error test...")
 print("This line is fine ✓")
 
 # This will cause a NameError — undefined variable
-print(undefined_variable)
+print(232 + 23)

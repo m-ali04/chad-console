@@ -1,4 +1,4 @@
-import chadconsole 
+import chadconsole
 
 print("Hello, world!")
 print({"key": "value", "nested": [1, 2, 3]})

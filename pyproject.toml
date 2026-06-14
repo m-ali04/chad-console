@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12"
 authors = [
-    { name = "m-ali04", email = "[EMAIL_ADDRESS]" },
+    { name = "m-ali04", email = "m-ali04@users.noreply.github.com" },
 ]
 keywords = ["console", "gui", "developer-tools", "pretty-print", "customtkinter", "chad-console"]
 classifiers = [
