@@ -1,6 +1,0 @@
-=== Starting import ===
-=== Import OK ===
-=== Printing standard text ===
-=== Calling input() ===
-=== Input returned: ali ===
-=== Keeping alive ===

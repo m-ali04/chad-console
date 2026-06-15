@@ -20,3 +20,8 @@ print(a)
 print(b)
 print(c)
 print(d)
+
+
+
+for i in d:
+    print(i)
